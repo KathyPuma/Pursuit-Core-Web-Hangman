@@ -9,18 +9,53 @@
 
 var readlineSync = require('readline-sync');
 
-let words= ["hello", "happy"]
+let words = ["hello", "happy"]
 
 
-const getRandomWord = (arr) =>{
-  let random = arr[Math.floor(Math.random()*arr.length)]
-  return random 
+const getRandomWord = (arr) => {
+  let random = arr[Math.floor(Math.random() * arr.length)]
+  return random
+}
+
+const setupHiddenWord = (randomWord) => {
+  let hiddenWord = []
+  console.log(randomWord.length)
+  for (let i = 0; i < randomWord.length; i++) {
+    hiddenWord.push("_")
+  }
+  return hiddenWord
+}
+
+const checkIfLetterExist = (letter, randomWord) => {
+  return randomWord.includes(letter)
 }
 
 
-const beginGame = () =>{
-  let generatedWord = getRandomWord(words)
-  console.log(generatedWord)
-}
 
+
+const beginGame = () => {
+  let generatedRandomWord = getRandomWord(words)
+  console.log(generatedRandomWord)
+  let blank = setupHiddenWord(generatedRandomWord)
+  console.log(blank)
+  const letterInput = readlineSync.question("Type a letter: ")
+  console.log(letterInput)
+
+  let tries = 6
+
+  if (checkIfLetterExist(letterInput, generatedRandomWord)) {
+    console.log("letter exists")
+
+
+  } else {
+    console.log("wrong")
+    tries--
+    console.log(tries)
+  }
+
+
+
+
+
+}
 beginGame()
