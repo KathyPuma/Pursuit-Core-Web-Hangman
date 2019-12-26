@@ -1,5 +1,4 @@
 const readline = require('readline-sync');
-
 function getValidLetterGuess() {
   function guessIsValid(letter) {
     return letter.length === 1 && letter.toUpperCase() != letter.toLowerCase()
