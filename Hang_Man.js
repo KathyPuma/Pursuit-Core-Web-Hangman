@@ -7,8 +7,10 @@
 // The user should see the correct answer if she loses
 
 
-var readlineSync = require('readline-sync');
 
+
+
+var readlineSync = require('readline-sync');
 let words = ["hello", "happy"]
 
 
@@ -39,12 +41,112 @@ const replaceWithLetter = (randomWord, letter, hiddenWord) => {
 }
 
 
-const winner = (tries, hiddenWord, randomWord) => {
+const gameResult = (tries, hiddenWord, randomWord) => {
   if (tries === 0) {
     return "You Lose!"
   } else if (hiddenWord === randomWord) {
     return "You Win!"
 
+  }
+}
+
+const wrongAnswer = (count) =>{
+  let hangman = 
+
+  `
+  _____
+  |   |
+  |
+  |
+  |
+  |
+  |
+  |_____
+  `
+
+  if(count === 6){
+    console.log(hangman)
+
+  }else if(count === 5){
+    hangman = 
+    `
+    _____
+    |   |
+    |   O
+    |
+    |
+    |
+    |
+    |_____
+    `
+    console.log(hangman)
+
+  }else if(count === 4){
+    hangman = 
+    `
+    _____
+    |   |
+    |   O
+    |   |
+    |   |
+    |
+    |
+    |_____
+    `
+    console.log(hangman)
+  }else if(count === 3){
+    hangman = 
+    `
+    _____
+    |   |
+    |   O
+    |   |/
+    |   |
+    |
+    |
+    |_____
+
+    `
+    console.log(hangman)
+  }else if(count === 2){
+    hangman = 
+    `
+    _____
+    |   |
+    |   O
+    |  \\|/
+    |   |
+    |
+    |
+    |_____
+    `
+    console.log(hangman)
+  }else if(count === 1){
+    hangman = 
+    `
+    _____
+    |   |
+    |   O
+    |  \\|/
+    |   |
+    |  /
+    | 
+    |_____
+    `
+    console.log(hangman)
+  }else {
+    hangman = 
+    `
+    _____
+    |   |
+    |   O
+    |  \\|/
+    |   |
+    |  / \\
+    | 
+    |_____
+    `
+    console.log(hangman)
   }
 }
 
@@ -60,16 +162,26 @@ const beginGame = () => {
   let tries = 6
   while (tries > 0 && !(hiddenWordJoin === generatedRandomWord)) {
     const letterInput = readlineSync.question("Type a letter: ")
+
+    // console.log(letterInput)
+    // console.log(typeof(letterInput))
     // let allInputJoin = allInput.join("")
 
-    if (letterInput.length > 1) {
-      console.log("only 1 letter")
+    // if (letterInput.length > 1) {
+    //   console.log("only 1 letter")
 
-    }else if(letterInput.length === 0){
-      console.log("No blank input")
+    // }else if(letterInput.length === 0){
+    //   console.log("No blank input")
 
-    } else {
+    // } else {
       allInput.push(letterInput)
+
+    // if (allInput.includes(letterInput)) {
+    //   console.log("no repeat")
+    // }else{
+    //   console.log("repeat")
+    // }
+    
       console.log(`All of your guesses: ${allInput}`)
       if (checkIfLetterExist(letterInput, generatedRandomWord)) {
         console.log("letter exists")
@@ -79,17 +191,24 @@ const beginGame = () => {
         console.log(`Wrong! You have ${tries - 1} tries left`)
         tries--
         console.log(tries)
+      
+       
       }
-    }
+      wrongAnswer(tries)
+      }
+    // }
 
 
-  }
+  // }
 
 
 
-  let endOfGame = winner(tries, hiddenWordJoin, generatedRandomWord)
+
+  let endOfGame = gameResult(tries, hiddenWordJoin, generatedRandomWord)
   console.log(endOfGame)
 }
 
 
 beginGame()
+
+
